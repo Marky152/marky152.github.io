@@ -1,0 +1,151 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Light theme — warm paper */
+  --base: 251 247 239; /* #FBF7EF */
+  --panel: 242 235 221; /* #F2EBDD */
+  --panel2: 235 226 208;
+  --ink: 33 26 18; /* #211A12 */
+  --dim: 92 82 68;
+  --faint: 138 127 111;
+  --stroke-ghost: rgba(33, 26, 18, 0.18);
+}
+
+.dark {
+  /* Dark theme — near-black warm ink */
+  --base: 14 13 12; /* #0E0D0C */
+  --panel: 22 20 18; /* #161412 */
+  --panel2: 33 30 26; /* #211E1A */
+  --ink: 243 236 224; /* #F3ECE0 */
+  --dim: 183 172 155; /* #B7AC9B */
+  --faint: 124 118 107; /* #7C766B */
+  --stroke-ghost: rgba(231, 174, 86, 0.25);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background-color: rgb(var(--base));
+  color: rgb(var(--ink));
+  transition: background-color 0.4s ease, color 0.4s ease;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: rgba(231, 174, 86, 0.35);
+}
+
+:focus-visible {
+  outline: 2px solid #e7ae56;
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+@media (pointer: fine) {
+  body.custom-cursor,
+  body.custom-cursor a,
+  body.custom-cursor button {
+    cursor: none;
+  }
+}
+
+/* Over the hero the bubble stands in for the pointer — fade the gold cursor. */
+[data-cursor-dot],
+[data-cursor-ring] {
+  transition: opacity 0.3s ease;
+}
+body.bubble-cursor [data-cursor-dot],
+body.bubble-cursor [data-cursor-ring] {
+  opacity: 0;
+}
+
+.hairline {
+  border-color: rgba(231, 174, 86, 0.16);
+}
+
+/* Outlined (stroked) display text */
+.text-outline {
+  -webkit-text-stroke: 1.5px var(--stroke-ghost);
+  color: transparent;
+}
+
+.text-outline-gold {
+  -webkit-text-stroke: 1.5px rgba(231, 174, 86, 0.6);
+  color: transparent;
+}
+
+/* Film grain overlay */
+.grain {
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  z-index: 80;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain-shift 0.9s steps(4) infinite;
+}
+
+@keyframes grain-shift {
+  0% { transform: translate(0, 0); }
+  25% { transform: translate(-2%, 1.5%); }
+  50% { transform: translate(1.5%, -2%); }
+  75% { transform: translate(-1%, -1%); }
+  100% { transform: translate(0, 0); }
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  will-change: transform;
+}
+
+/* Sliding-fill link hover */
+.fill-link {
+  position: relative;
+  background-image: linear-gradient(#e7ae56, #e7ae56);
+  background-repeat: no-repeat;
+  background-size: 0% 100%;
+  background-position: 0 100%;
+  transition: background-size 0.5s cubic-bezier(0.16, 1, 0.3, 1), color 0.4s;
+}
+
+.fill-link:hover {
+  background-size: 100% 100%;
+  color: #0e0d0c;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .grain {
+    animation: none;
+  }
+}
