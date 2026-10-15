@@ -122,9 +122,9 @@ body.bubble-cursor [data-cursor-ring] {
   will-change: transform;
 }
 
-/* Sliding-fill link hover */
+/* Sliding-fill link hover. No `position` here: it would override Tailwind's
+   `absolute` and pull positioned links (e.g. the hero's "Scroll ↓") out of place. */
 .fill-link {
-  position: relative;
   background-image: linear-gradient(#e7ae56, #e7ae56);
   background-repeat: no-repeat;
   background-size: 0% 100%;

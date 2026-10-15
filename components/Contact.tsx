@@ -8,32 +8,38 @@ const word = "LET'S TALK";
 /** Each letter lifts and tilts on hover — the headline itself is the toy. */
 function PlayfulHeadline() {
   const reduced = useReducedMotion();
+  let i = 0;
   return (
     <span aria-label={word} role="text" className="inline-block">
-      {word.split("").map((ch, i) =>
-        ch === " " ? (
-          <span key={i} className="inline-block w-[0.35em]" />
-        ) : (
-          <motion.span
-            key={i}
-            aria-hidden="true"
-            className="inline-block cursor-default"
-            whileHover={
-              reduced
-                ? undefined
-                : {
-                    y: -22,
-                    rotate: i % 2 === 0 ? -8 : 8,
-                    scale: 1.12,
-                    color: "#E7AE56",
-                  }
-            }
-            transition={{ type: "spring", stiffness: 320, damping: 14 }}
-          >
-            {ch}
-          </motion.span>
-        )
-      )}
+      {/* Letters are grouped per word so a narrow screen wraps between words, never mid-word. */}
+      {word.split(" ").map((w, wi) => (
+        <span key={wi} className="inline-block whitespace-nowrap">
+          {wi > 0 && <span className="inline-block w-[0.35em]" />}
+          {w.split("").map((ch) => {
+            const n = i++;
+            return (
+              <motion.span
+                key={n}
+                aria-hidden="true"
+                className="inline-block cursor-default"
+                whileHover={
+                  reduced
+                    ? undefined
+                    : {
+                        y: -22,
+                        rotate: n % 2 === 0 ? -8 : 8,
+                        scale: 1.12,
+                        color: "#E7AE56",
+                      }
+                }
+                transition={{ type: "spring", stiffness: 320, damping: 14 }}
+              >
+                {ch}
+              </motion.span>
+            );
+          })}
+        </span>
+      ))}
     </span>
   );
 }

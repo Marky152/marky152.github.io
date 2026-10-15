@@ -69,8 +69,8 @@ export default function ProjectCard({
             aria-hidden="true"
             className="absolute inset-0 bg-gradient-to-t from-[#0E0D0C]/60 via-transparent to-transparent opacity-50 transition-opacity duration-500 group-hover:opacity-20"
           />
-          {/* Tag chips over the image */}
-          <div className="absolute bottom-4 left-4 flex flex-wrap gap-2">
+          {/* Tag chips over the image — top-right, clear of the titles baked into the covers' bottom-left */}
+          <div className="absolute right-4 top-4 flex flex-wrap justify-end gap-2 pl-16">
             {project.tags.map((tag) => (
               <span
                 key={tag}

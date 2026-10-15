@@ -246,7 +246,7 @@ export default function Hero() {
           aria-hidden="true"
           animate={{ opacity: moved ? 0 : 1 }}
           transition={{ duration: 0.5 }}
-          className="absolute bottom-[13vh] left-1/2 z-30 -translate-x-1/2 font-serif text-base italic text-faint"
+          className="absolute bottom-[13vh] left-1/2 z-30 -translate-x-1/2 rounded-full bg-surface/70 px-4 py-1 font-serif text-base italic text-dim backdrop-blur-sm"
         >
           ( move to reveal )
         </motion.span>
